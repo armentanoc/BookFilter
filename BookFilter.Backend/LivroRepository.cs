@@ -13,13 +13,18 @@ namespace BookFilter.Backend
         {
             this.livros = livros;
         }
-        public List<Livro> booleanBooks(Func<Livro, bool> booleanBookFilter)
+        //public List<Livro> booleanBooks(Func<Livro, bool> booleanBookFilter)
+        //{
+        //    return livros.Where(booleanBookFilter).ToList();
+        //}
+        //public List<Livro> Filtrar(Filter<Livro> filtro)
+        //{
+        //    return livros.Where(x => filtro(x)).ToList();
+        //}
+
+        public List<Livro> FiltrarComInterface(IFilter<Livro> filtro)
         {
-            return livros.Where(booleanBookFilter).ToList();
-        }
-        public List<Livro> Filtrar(Filter<Livro> filtro)
-        {
-            return livros.Where(x => filtro(x)).ToList();
+            return livros.Where(x => filtro.Filter(x)).ToList();
         }
 
         public List<Livro> FiltrarComFunc(Func<Livro, bool> filtro)

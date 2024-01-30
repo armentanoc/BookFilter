@@ -18,31 +18,35 @@ namespace BookFilter.UI
 
             var livroRepository = new LivroRepository(livros);
 
-            Func<Livro, bool> funcAnoPublicacao = livro => LivroFilter.AnoPublicacaoMaiorOuIgual(livro, ANO_PUBLICACAO_MAXIMO);
-            List<Livro> resultadoAnoPublicacaoFunc = livroRepository.FiltrarComFunc(funcAnoPublicacao);
-            //preferível
+            //Func<Livro, bool> funcAnoPublicacao = livro => LivroFilter.AnoPublicacaoMaiorOuIgual(livro, ANO_PUBLICACAO_MAXIMO);
+            //List<Livro> resultadoAnoPublicacaoFunc = livroRepository.FiltrarComFunc(funcAnoPublicacao);
+            ////preferível
 
-            Filter<Livro> filtroPrecoMaximo = livro => LivroFilter.PrecoMenorOuIgual(livro, PRECO_MAXIMO);
-            List<Livro> resultadoPrecoMaximo = livroRepository.Filtrar(filtroPrecoMaximo);
-            //é bom porque mantém genérico 
+            //Filter<Livro> filtroPrecoMaximo = livro => LivroFilter.PrecoMenorOuIgual(livro, PRECO_MAXIMO);
+            //List<Livro> resultadoPrecoMaximo = livroRepository.Filtrar(filtroPrecoMaximo);
+            ////é bom porque mantém genérico 
 
-            Func<Livro, string, bool> filtroPalavraNoTitulo = (livro, palavra) => livro.Titulo.Contains(palavra, StringComparison.OrdinalIgnoreCase);
-            List<Livro> resultadoPalavraNoTitulo = livroRepository.FiltrarDiretamente(filtroPalavraNoTitulo, "C#");
-            //ruim porque mistura muito as coisas e não é tão genérico quanto gostaríamos
+            IFilter<Livro> filtroPrecoMaximo = new LivroFilterPreco(PRECO_MAXIMO);
+            List<Livro> resultadoPrecoMaximo = livroRepository.FiltrarComInterface(filtroPrecoMaximo);
+
+            //Func<Livro, string, bool> filtroPalavraNoTitulo = (livro, palavra) => livro.Titulo.Contains(palavra, StringComparison.OrdinalIgnoreCase);
+            //List<Livro> resultadoPalavraNoTitulo = livroRepository.FiltrarDiretamente(filtroPalavraNoTitulo, "C#");
+            ////ruim porque mistura muito as coisas e não é tão genérico quanto gostaríamos
 
             Display.LivrosByMessage("Todos os livros:", livros);
-            Display.LivrosByMessage($"Livros com Ano de Publicação >= {ANO_PUBLICACAO_MAXIMO}:", resultadoAnoPublicacaoFunc);
+            //    Display.LivrosByMessage($"Livros com Ano de Publicação >= {ANO_PUBLICACAO_MAXIMO}:", resultadoAnoPublicacaoFunc);
             Display.LivrosByMessage($"Livros com Preço <= {PRECO_MAXIMO}:", resultadoPrecoMaximo);
-            Display.LivrosByMessage($"Livros com '{PALAVRA_TITULO}' no Título:", resultadoPalavraNoTitulo);
+            //    Display.LivrosByMessage($"Livros com '{PALAVRA_TITULO}' no Título:", resultadoPalavraNoTitulo);
+            //}
         }
+        //exemplo
+
+        //public List<int> FilterNumber(Func<int, bool> filter)
+        //{
+        //    return _numbers.Where(filter).ToList();
+        //}
+
+        // EXEMPLO: FilterNumber(number => number % 2 == 0)
+        // RETORNO: todos os pares da lista
     }
-    //exemplo
-
-    //public List<int> FilterNumber(Func<int, bool> filter)
-    //{
-    //    return _numbers.Where(filter).ToList();
-    //}
-
-    // EXEMPLO: FilterNumber(number => number % 2 == 0)
-    // RETORNO: todos os pares da lista
 }
