@@ -1,21 +1,14 @@
-﻿using BookFilter.Backend;
-using System.Globalization;
-
+﻿
 namespace BookFilter.UI
 {
     internal class Display
     {
-        internal static void LivrosByMessage(string message, IEnumerable<Livro> livros)
+        internal static void CollectionByMessage<T>(string message, IEnumerable<T> collection)
         {
             Console.WriteLine($"\n{message}");
-            foreach (var livro in livros)
+            foreach (var item in collection)
             {
-                Console.WriteLine(
-                    $"Título => {livro.Titulo}, " +
-                    $"Autor => {livro.Autor}, " +
-                    $"Ano de Publicação => {livro.AnoPublicacao}, " +
-                    $"Preço => {livro.Preco.ToString("C", CultureInfo.GetCultureInfo("pt-BR"))}" 
-                    );
+                Console.WriteLine(item.ToString());
             }
         }
     }
