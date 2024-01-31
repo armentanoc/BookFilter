@@ -3,13 +3,14 @@
 O `BookFilterService` é um módulo do projeto `BookFilter` que oferece métodos para filtrar uma coleção de livros com base em diferentes critérios. Essa funcionalidade é implementada através do uso de delegates e uma interface:
 ```lua
 Domain
-|-- BookFilterService
-|   |-- BookFilterService.cs
-|   |-- BookPublicationYearFilter.cs
-|   |-- BookPriceFilter.cs
-|   |-- BookTitleFilter.cs
 |-- Model
+|   |-- Book.cs
+|   |-- BookPriceFilter.cs
+|   |-- BookPublicationYearFilter.cs
+|   |-- BookTitleFilter.cs
 |   |-- IFilter.cs
+|-- Service
+|   |-- BookFilterService.cs
 |-- Infrastructure
 |   |-- BookRepository.cs
 ```
