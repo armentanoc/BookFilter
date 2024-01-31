@@ -1,5 +1,4 @@
-﻿using BookFilter.Backend;
-
+﻿
 namespace BookFilter.UI
 {
     class Program

@@ -1,6 +1,6 @@
-﻿
+﻿using BookFilter.Backend.Domain.Model;
 
-namespace BookFilter.Backend
+namespace BookFilter.Backend.Infrastructure
 {
     public delegate bool Filter<T>(T element);
     public class BookRepository
@@ -10,7 +10,7 @@ namespace BookFilter.Backend
 
         public BookRepository(List<Book> books)
         {
-            this._books = books;
+            _books = books;
         }
 
         public List<Book> Filter(IFilter<Book> iFilter) //interface filter

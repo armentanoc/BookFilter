@@ -1,5 +1,4 @@
-﻿
-namespace BookFilter.Backend
+﻿namespace BookFilter.Backend.Domain.Model
 {
     public class BookPublicationYearFilter : IFilter<Book>
     {
@@ -7,7 +6,7 @@ namespace BookFilter.Backend
 
         public BookPublicationYearFilter(int minYear)
         {
-            this.MinYear = minYear;
+            MinYear = minYear;
         }
 
         public bool Filter(Book book)

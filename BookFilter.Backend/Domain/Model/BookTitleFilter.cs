@@ -1,5 +1,4 @@
-﻿
-namespace BookFilter.Backend
+﻿namespace BookFilter.Backend.Domain.Model
 {
     public class BookTitleFilter : IFilter<Book>
     {
@@ -7,7 +6,7 @@ namespace BookFilter.Backend
 
         public BookTitleFilter(string wordInTitle)
         {
-            this.WordInTitle = wordInTitle;
+            WordInTitle = wordInTitle;
         }
 
         public bool Filter(Book book)

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace BookFilter.Backend;
+namespace BookFilter.Backend.Domain.Model;
 public class Book
 {
     public string Title { get; private set; }

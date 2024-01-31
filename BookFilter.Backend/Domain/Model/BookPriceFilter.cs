@@ -1,5 +1,4 @@
-﻿
-namespace BookFilter.Backend
+﻿namespace BookFilter.Backend.Domain.Model
 {
     public class BookPriceFilter : IFilter<Book>
     {
@@ -7,7 +6,7 @@ namespace BookFilter.Backend
 
         public BookPriceFilter(decimal maxPrice)
         {
-            this.MaxPrice = maxPrice;
+            MaxPrice = maxPrice;
         }
 
         public bool Filter(Book book)

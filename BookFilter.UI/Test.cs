@@ -1,4 +1,6 @@
-﻿using BookFilter.Backend;
+﻿using BookFilter.Backend.Domain.Model;
+using BookFilter.Backend.Domain.Service;
+using BookFilter.Backend.Infrastructure;
 
 namespace BookFilter.UI
 {
@@ -14,29 +16,27 @@ namespace BookFilter.UI
         };
             return new BookRepository(books);
         }
-        internal static void BookRepositoryByMinPublicationYear(BookRepository bookRepository, int minPublicationYear)
+        internal static void DisplayAllBooks(BookRepository bookRepository)
         {
-            IFilter<Book> minPublicationYearFilter = new BookPublicationYearFilter(minPublicationYear);
-            List<Book> resultMinPublicationYear = bookRepository.Filter(minPublicationYearFilter);
-            Display.CollectionByMessage($"Livros com Ano de Publicação >= {minPublicationYear}:", resultMinPublicationYear);
+            Display.CollectionByMessage("Todos os livros:", bookRepository.GetAll());
         }
 
         internal static void BookRepositoryByMaxPrice(BookRepository bookRepository, decimal maxPrice)
         {
-            IFilter<Book> maxPriceFilter = new BookPriceFilter(maxPrice);
-            List<Book> resultMaxPrice = bookRepository.Filter(maxPriceFilter);
-            Display.CollectionByMessage($"Livros com Preço <= {maxPrice}:", resultMaxPrice);
+            List<Book> filteredBooks = BookFilterService.BookRepositoryByMaxPrice(bookRepository, maxPrice);
+            Display.CollectionByMessage($"Livros com Preço <= {maxPrice}:", filteredBooks);
+        }
+
+        internal static void BookRepositoryByMinPublicationYear(BookRepository bookRepository, int minPublicationYear)
+        {
+            List<Book> filteredBooks = BookFilterService.BookRepositoryByMinPublicationYear(bookRepository, minPublicationYear);
+            Display.CollectionByMessage($"Livros com Ano de Publicação >= {minPublicationYear}:", filteredBooks);
         }
 
         internal static void BookRepositoryByWordInTitle(BookRepository bookRepository, string wordInTitle)
         {
-            IFilter<Book> wordInTitleFilter = new BookTitleFilter(wordInTitle);
-            List<Book> resultWordInTitleFilter = bookRepository.Filter(wordInTitleFilter);
-            Display.CollectionByMessage($"Livros com '{wordInTitle}' no Título:", resultWordInTitleFilter);
-        }
-        internal static void DisplayAllBooks(BookRepository bookRepository)
-        {
-            Display.CollectionByMessage("Todos os livros:", bookRepository.GetAll());
+            List<Book> filteredBooks = BookFilterService.BookRepositoryByWordInTitle(bookRepository, wordInTitle);
+            Display.CollectionByMessage($"Livros com '{wordInTitle}' no Título:", filteredBooks);
         }
     }
 }

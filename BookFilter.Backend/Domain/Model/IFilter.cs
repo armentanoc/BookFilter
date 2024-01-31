@@ -1,5 +1,4 @@
-﻿
-namespace BookFilter.Backend
+﻿namespace BookFilter.Backend.Domain.Model
 {
     public interface IFilter<T>
     {
